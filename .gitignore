@@ -4,6 +4,7 @@
 ### Python ###
 # User create
 configs.py
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
