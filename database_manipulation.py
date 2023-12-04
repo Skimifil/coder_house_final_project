@@ -10,6 +10,10 @@ def conecta_collection(database,coll):
     return collection, client
 
 
+def desconect_collection(client):
+    client.close()
+
+
 # Caso seu cluster ainda não tenha o banco de dados, você pode usar este script para criar e começar a popular
 def create_mongo():
 
@@ -28,7 +32,7 @@ def create_mongo():
     except Exception as e:
         print(e)
     finally:
-        client.close()
+        desconect_collection(client)
 
 
 def insert_mongo(dados):
@@ -43,7 +47,7 @@ def insert_mongo(dados):
     except Exception as e:
         print(e)
     finally:
-        client.close()
+        desconect_collection(client)
 
 
 def list_mongo_db_info():
@@ -56,7 +60,20 @@ def list_mongo_db_info():
     except Exception as e:
         print(e)
     finally:
-        client.close()
+        desconect_collection(client)
+
+
+def list_mongo_db_collection_info():
+
+    collection, client = conecta_collection("db_produtos","produtos")
+
+    try:
+        for doc in collection.find():
+            print(doc)
+    except Exception as e:
+        print(e)
+    finally:
+        desconect_collection(client)
 
 
 def remove_doc_mongo(id_doc):
@@ -74,4 +91,17 @@ def remove_doc_mongo(id_doc):
     except Exception as e:
         print(e)
     finally:
-        client.close()
+        desconect_collection(client)
+
+
+def alter_collunm(nome_antigo, nome_novo):
+
+    collection, client = conecta_collection("db_produtos", "produtos")
+    try:
+        collection.update_many({}, {"$rename": {nome_antigo: nome_novo}})
+        valida_alterado = collection.find_one()
+        print(f"Foi feito a alteração, segue um documento de exemplo: {valida_alterado}")
+    except Exception as e:
+        print(e)
+    finally:
+        desconect_collection(client)
