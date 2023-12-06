@@ -7,7 +7,8 @@ def connect_mongo():
 
     mongo_user = MONGODB_CONFIG['MONGODBUSER']
     mongo_pass = MONGODB_CONFIG['MONGODBPASSWORD']
-    uri = f"mongodb+srv://{mongo_user}:{mongo_pass}@rpcarvalho.tffavxg.mongodb.net/?retryWrites=true&w=majority"
+    mongo_server = MONGODB_CONFIG['MONGODBSERVER']
+    uri = f"mongodb+srv://{mongo_user}:{mongo_pass}@{mongo_server}/?retryWrites=true&w=majority"
 
     # Create a new client and connect to the server
     client = MongoClient(uri, server_api=ServerApi('1'))

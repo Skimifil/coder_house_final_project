@@ -16,7 +16,7 @@ def desconect_collection(client):
 
 # Caso seu cluster ainda não tenha o banco de dados, você pode usar este script para criar e começar a popular
 def create_mongo():
-
+    #TODO - Deixar mais genérico para ser usado com dataframes diferentes
     collection, client = conecta_collection("db_produtos","produtos")
 
     try:
