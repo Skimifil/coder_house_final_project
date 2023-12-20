@@ -1,21 +1,13 @@
-from database_connect import connect_mongo
-from database_manipulation import *
-import requests
+from mongodb_database_manipulation import *
+from api_spotify import import_data
 
-
-def import_data(url):
-    response = requests.get(url)
-    return response.json()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
     connect_mongo()
-    docs = import_data("https://labdados.com/produtos")
-    insert_mongo(docs)
-    #list_mongo_db_info()
-    #remove_doc_mongo("6552d722b1b727b297c1ad49")
+    artistas = import_data('https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg')
+    insert_mongo("db_produtos", "produtos", artistas)
     #list_mongo_db_info()
     list_mongo_db_collection_info()
-    #alter_collunm("lon", "Longitude")

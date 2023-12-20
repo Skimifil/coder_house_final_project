@@ -35,7 +35,3 @@ def import_data(endpoint):
     response = requests.request('GET', url=endpoint, headers=headers)
     return response.json()
 
-
-if __name__ == '__main__':
-    artistas = import_data('https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg')
-    print(artistas)

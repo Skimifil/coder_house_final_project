@@ -1,6 +1,21 @@
 # Pipeline de dados com Python
 
-Esse projeto tem por objetivo criar uma pipeline de dados que pega informações de uma API e armazena em uma banco de dados não-relacional (MongoDB) e em relacional (MySQL).
+Esse projeto tem por objetivo criar uma pipeline de dados que pega informações de uma API e armazena em uma banco de dados não-relacional e em relacional.
+
+Irei usar as tecnologias como:
+Banco de dados:
+1. MongoDB
+2. ScyllaDB
+3. MySQL
+
+Linguagem:
+1. Python
+
+Frameworks:
+1. Request
+2. Jupyter
+3. Spark
+
 
 ## Pré-requisitos
 

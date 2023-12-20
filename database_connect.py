@@ -4,7 +4,6 @@ from configs import MONGODB_CONFIG
 
 
 def connect_mongo():
-
     mongo_user = MONGODB_CONFIG['MONGODBUSER']
     mongo_pass = MONGODB_CONFIG['MONGODBPASSWORD']
     mongo_server = MONGODB_CONFIG['MONGODBSERVER']
@@ -20,3 +19,11 @@ def connect_mongo():
         return client
     except Exception as e:
         print(e)
+
+
+def connect_mysql():
+    pass
+
+
+def connect_scylladb():
+    pass

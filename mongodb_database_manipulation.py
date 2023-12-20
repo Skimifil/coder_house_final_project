@@ -2,7 +2,7 @@ from database_connect import connect_mongo
 from bson import ObjectId
 
 
-def conecta_collection(database,coll):
+def conecta_collection(database, coll):
     client = connect_mongo()
 
     db = client[database]
@@ -10,14 +10,13 @@ def conecta_collection(database,coll):
     return collection, client
 
 
-def desconect_collection(client):
+def disconnect_connection(client):
     client.close()
 
 
 # Caso seu cluster ainda não tenha o banco de dados, você pode usar este script para criar e começar a popular
-def create_mongo():
-    #TODO - Deixar mais genérico para ser usado com dataframes diferentes
-    collection, client = conecta_collection("db_produtos","produtos")
+def create_mongo(cr_database, cr_collection):
+    collection, client = conecta_collection(cr_database, cr_collection)
 
     try:
         # Colocado uma informação genérica para validarmos se o banco foi criado mesmo.
@@ -32,27 +31,26 @@ def create_mongo():
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
 
 
-def insert_mongo(dados):
-
-    collection, client = conecta_collection("db_produtos","produtos")
+def insert_mongo(ins_database, ins_collection, dados):
+    collection, client = conecta_collection(ins_database, ins_collection)
 
     try:
         collection.insert_many(dados)
         numero_de_docs_inseridos = len(dados.inser_ids)
         numero_de_docs_na_base = collection.count_documents({})
-        print(f"Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados, passando a existir {numero_de_docs_na_base} documentos.")
+        print(
+            f"Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados, passando a existir {numero_de_docs_na_base} documentos.")
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
 
 
-def list_mongo_db_info():
-
-    collection, client = conecta_collection("db_produtos","produtos")
+def list_mongo_db_info(dbinfo_database, dbinfo_collection):
+    collection, client = conecta_collection(dbinfo_database, dbinfo_collection)
 
     try:
         numero_de_docs_na_base = collection.count_documents({})
@@ -60,12 +58,11 @@ def list_mongo_db_info():
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
 
 
-def list_mongo_db_collection_info():
-
-    collection, client = conecta_collection("db_produtos","produtos")
+def list_mongo_db_collection_info(collinfo_database, collinfo_collection):
+    collection, client = conecta_collection(collinfo_database, collinfo_collection)
 
     try:
         for doc in collection.find():
@@ -73,12 +70,11 @@ def list_mongo_db_collection_info():
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
 
 
-def remove_doc_mongo(id_doc):
-
-    collection, client = conecta_collection("db_produtos", "produtos")
+def remove_doc_mongo(rem_database, rem_collection, id_doc):
+    collection, client = conecta_collection(rem_database, rem_collection)
 
     try:
         id_obj = ObjectId(id_doc)
@@ -91,12 +87,11 @@ def remove_doc_mongo(id_doc):
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
 
 
-def alter_collunm(nome_antigo, nome_novo):
-
-    collection, client = conecta_collection("db_produtos", "produtos")
+def alter_collunm(alt_database, alt_collection, nome_antigo, nome_novo):
+    collection, client = conecta_collection(alt_database, alt_collection)
     try:
         collection.update_many({}, {"$rename": {nome_antigo: nome_novo}})
         valida_alterado = collection.find_one()
@@ -104,4 +99,4 @@ def alter_collunm(nome_antigo, nome_novo):
     except Exception as e:
         print(e)
     finally:
-        desconect_collection(client)
+        disconnect_connection(client)
