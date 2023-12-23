@@ -18,7 +18,7 @@ def connect_mongo():
         print("Pinged your deployment. You successfully connected to MongoDB!")
         return client
     except Exception as e:
-        print(e)
+        print(f"Erro ao conectar no MongoDB, erro: {e}")
 
 
 def connect_mysql():

@@ -16,12 +16,9 @@ def connect_api():
 
     # Requisição
     url = 'https://accounts.spotify.com/api/token'
-
     headers = {'Authorization': f'Basic {base64_string}',
                'Content-Type': 'application/x-www-form-urlencoded'}
-
     payload = {'grant_type': 'client_credentials'}
-
     response = requests.request('POST', url=url, headers=headers, data=payload)
     access_token = response.json()['access_token']
 

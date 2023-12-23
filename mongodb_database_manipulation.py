@@ -38,8 +38,8 @@ def insert_mongo(ins_database, ins_collection, dados):
     collection, client = conecta_collection(ins_database, ins_collection)
 
     try:
-        collection.insert_many(dados)
-        numero_de_docs_inseridos = len(dados.inser_ids)
+        para_inserir = collection.insert_many(dados)
+        numero_de_docs_inseridos = len(para_inserir.inserted_ids)
         numero_de_docs_na_base = collection.count_documents({})
         print(
             f"Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados, passando a existir {numero_de_docs_na_base} documentos.")

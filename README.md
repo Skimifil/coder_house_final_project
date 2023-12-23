@@ -54,6 +54,15 @@ Crie uma conta no MongoDB Atlas, crie um cluster, um usuário de acesso e config
 
 [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
 
+Ao criar seu banco de dados crie seguindo a seguinte estrutura:
+
+Banco de dados: spotify
+
+Collections:
+1. artists
+2. artists_albums
+3. artists_top_tracks
+
 ### Spotify API
 
 Será usado os dados da API do Spotify para o Pipeline no projeto final, então ja preparei algumas coisas pra isso. É preciso se cadastrar no 'Spotify for Developers' e seguir os passos de criação de 'app'.
