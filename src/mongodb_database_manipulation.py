@@ -1,4 +1,4 @@
-from database_connect import connect_mongo
+from src.connections.database_connect import connect_mongo
 from bson import ObjectId
 
 

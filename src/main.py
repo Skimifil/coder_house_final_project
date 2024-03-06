@@ -1,5 +1,5 @@
 from mongodb_database_manipulation import *
-from api_spotify import import_data
+from src.connections.api_spotify import import_data
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
