@@ -5,6 +5,8 @@
 # User create
 configs.py
 .idea
+.iml
+logs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

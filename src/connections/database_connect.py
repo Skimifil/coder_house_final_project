@@ -1,6 +1,10 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from src.connections.configs import MONGODB_CONFIG
+from src.logger import configurar_logger
+
+logger_database_connection = configurar_logger("database_connection",
+                                               "database_connection.log")
 
 
 def connect_mongo():
@@ -15,9 +19,12 @@ def connect_mongo():
     # Send a ping to confirm a successful connection
     try:
         client.admin.command('ping')
+        logger_database_connection.info(f"[connect_mongo] Pinged your deployment. You successfully connected to MongoDB!")
         print("Pinged your deployment. You successfully connected to MongoDB!")
         return client
     except Exception as e:
+        logger_database_connection.error(
+            f"[connect_mongo] Erro ao conectar no MongoDB, erro: {e}")
         print(f"Erro ao conectar no MongoDB, erro: {e}")
 
 

@@ -12,4 +12,3 @@ if __name__ == '__main__':
 
     artistas_top_tracks = import_data(f'https://api.spotify.com/v1/artists/{artist_id}/top-tracks?market=BR')
     insert_mongo("spotify", "artists_top_tracks", [artistas_top_tracks])
-
