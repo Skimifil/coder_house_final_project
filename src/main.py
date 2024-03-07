@@ -3,7 +3,7 @@ from src.connections.api_spotify import import_data
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    artist_id = '0TnOYISbd1XYRBk9myaseg'
+    artist_id = '3aqtJPuhfwxQ60jG1OAFQt'
     artistas = import_data(f'https://api.spotify.com/v1/artists/{artist_id}')
     insert_mongo("spotify", "artists", [artistas])
 

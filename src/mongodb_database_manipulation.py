@@ -64,7 +64,7 @@ def insert_mongo(ins_database, ins_collection, dados):
         logger_mongodb_data_manipulation.info(
             f"[insert_mongo] Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados {ins_database} e collection {ins_collection}, passando a existir {numero_de_docs_na_base} documentos.")
         print(
-            f"Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados, passando a existir {numero_de_docs_na_base} documentos.")
+            f"Foram inseridos {numero_de_docs_inseridos} documentos no banco de dados {ins_database} e collection {ins_collection}, passando a existir {numero_de_docs_na_base} documentos.")
     except Exception as e:
         logger_mongodb_data_manipulation.error(f"[insert_mongo] Erro ao inserir documentos no banco de dados {ins_database} e collection {ins_collection} devido ao erro {e}.")
         print(e)
