@@ -8,6 +8,18 @@ logger_api_connection = configurar_logger("api_connection",
 
 
 def connect_api():
+    """
+        Estabelece uma conexão com a API do Spotify.
+
+        Retorna:
+        - Token de acesso para ser usado nas requisições GET.
+
+        Exceções:
+        - Exception: Se ocorrer algum erro durante a conexão, uma exceção será levantada.
+
+        Exemplo:
+            >>> spotify = connect_api()
+    """
     try:
         client_id = SPOTIFY_CONFIG['CLIENTID']
         client_secret = SPOTIFY_CONFIG['CLIENTSECRET']
@@ -38,6 +50,19 @@ def connect_api():
 
 
 def import_data(endpoint):
+    """
+        Estabelece uma conexão com o endpoint da API do Spotify informado no parametro.
+
+        Retorna:
+        - Os dados do endpoint da API.
+
+        Exceções:
+        - Exception: Se ocorrer algum erro durante a conexão, uma exceção será levantada.
+
+        Exemplo:
+            >>> artist_id = '3aqtJPuhfwxQ60jG1OAFQt'
+            >>> artistas = import_data(f'https://api.spotify.com/v1/artists/{artist_id}')
+    """
     try:
         token = connect_api()
         headers = {'Authorization': f'Bearer {token}'}

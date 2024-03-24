@@ -7,6 +7,22 @@ logger_mongodb_data_manipulation = configurar_logger("mongodb_database_manipulat
 
 
 def conecta_collection(database, coll):
+    """
+        Conecta a uma coleção específica no banco de dados MongoDB.
+
+        Parâmetros:
+        - database (str): O nome do banco de dados MongoDB ao qual se conectar.
+        - coll (str): O nome da coleção MongoDB à qual se conectar.
+
+        Retorna:
+        - tuple: Uma tupla contendo o objeto cliente MongoClient conectado ao banco de dados especificado
+          e o objeto de coleção MongoDB especificado.
+
+        Exemplo:
+            >>> client, collection = conecta_collection('my_database', 'my_collection')
+            >>> # Agora você pode usar 'client' para operações de banco de dados mais amplas
+            >>> # e 'collection' para operações específicas na coleção.
+    """
     logger_mongodb_data_manipulation.info(
         f"[conecta_collection] Conectando na base de dados {database} e collection {coll}.")
 
@@ -20,12 +36,39 @@ def conecta_collection(database, coll):
 
 
 def disconnect_connection(client):
+    """
+        Desconecta de uma conexão do cliente MongoDB.
+
+        Parâmetros:
+        - client: O objeto de cliente MongoDB a partir do qual deseja-se desconectar.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> client, collection = disconnect_connection('my_database', 'my_collection')
+            >>> # Realizar operações com o cliente e a coleção
+            >>> disconnect_connection(client)
+    """
     logger_mongodb_data_manipulation.info(f"[disconnect_connection] Desconectado da base de dados.")
     client.close()
 
 
 # Caso seu cluster ainda não tenha o banco de dados, você pode usar este script para criar e começar a popular
 def create_mongo(cr_database, cr_collection):
+    """
+        Cria um banco de dados e uma coleção em um MongoDB.
+
+        Parâmetros:
+        - cr_database (str): O nome do banco de dados MongoDB.
+        - cr_collection (str): O nome da coleção MongoDB.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> create_mongo('my_database', 'my_collection')
+    """
     logger_mongodb_data_manipulation.info(
         f"[create_mongo] Criando a base de dados {cr_database} e collection {cr_collection}.")
     collection, client = conecta_collection(cr_database, cr_collection)
@@ -53,6 +96,21 @@ def create_mongo(cr_database, cr_collection):
 
 
 def insert_mongo(ins_database, ins_collection, dados):
+    """
+        Insere dados em uma coleção específica de um banco de dados MongoDB.
+
+        Parâmetros:
+        - ins_database (str): O nome do banco de dados MongoDB onde os dados serão inseridos.
+        - ins_collection (str): O nome da coleção MongoDB onde os dados serão inseridos.
+        - dados (str): Uma string contendo os dados a serem inseridos, no formato JSON.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> dados = '[{"key": "value"}, {"key": "value"}]'
+            >>> insert_mongo('my_database', 'my_collection', dados)
+    """
     logger_mongodb_data_manipulation.info(
         f"[insert_mongo] Inserindo dados na base de dados {ins_database} e collection {ins_collection}.")
     collection, client = conecta_collection(ins_database, ins_collection)
@@ -73,6 +131,19 @@ def insert_mongo(ins_database, ins_collection, dados):
 
 
 def list_mongo_db_info(dbinfo_database, dbinfo_collection):
+    """
+        Lista informações sobre uma coleção específica em um banco de dados MongoDB.
+
+        Parâmetros:
+        - dbinfo_database (str): O nome do banco de dados MongoDB do qual deseja-se obter informações.
+        - dbinfo_collection (str): O nome da coleção MongoDB da qual deseja-se obter informações.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> list_mongo_db_info('my_database', 'my_collection')
+    """
     collection, client = conecta_collection(dbinfo_database, dbinfo_collection)
 
     try:
@@ -85,6 +156,19 @@ def list_mongo_db_info(dbinfo_database, dbinfo_collection):
 
 
 def list_mongo_db_collection_info(collinfo_database, collinfo_collection):
+    """
+        Lista informações sobre todos os documentos em uma coleção específica de um banco de dados MongoDB.
+
+        Parâmetros:
+        - collinfo_database (str): O nome do banco de dados MongoDB do qual deseja-se listar informações sobre a coleção.
+        - collinfo_collection (str): O nome da coleção MongoDB da qual deseja-se listar informações.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> list_mongo_db_collection_info('my_database', 'my_collection')
+    """
     collection, client = conecta_collection(collinfo_database, collinfo_collection)
 
     try:
@@ -97,6 +181,20 @@ def list_mongo_db_collection_info(collinfo_database, collinfo_collection):
 
 
 def remove_doc_mongo(rem_database, rem_collection, id_doc):
+    """
+        Remove um documento específico de uma coleção em um banco de dados MongoDB.
+
+        Parâmetros:
+        - rem_database (str): O nome do banco de dados MongoDB onde está localizada a coleção.
+        - rem_collection (str): O nome da coleção MongoDB da qual deseja-se remover o documento.
+        - id_doc (str): O ID do documento que deve ser removido.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> remove_doc_mongo('my_database', 'my_collection', '61234abc567890def1234567')
+    """
     logger_mongodb_data_manipulation.info(
         f"[remove_doc_mongo] Removendo dados na base de dados {rem_database} e collection {rem_collection}.")
     collection, client = conecta_collection(rem_database, rem_collection)
@@ -121,6 +219,21 @@ def remove_doc_mongo(rem_database, rem_collection, id_doc):
 
 
 def alter_collunm(alt_database, alt_collection, nome_antigo, nome_novo):
+    """
+        Altera a coluna de um ou mais documentos de uma coleção em um banco de dados MongoDB.
+
+        Parâmetros:
+        - alt_database (str): O nome do banco de dados MongoDB onde está localizada a coleção.
+        - alt_collection (str): O nome da coleção MongoDB da qual deseja-se remover o documento.
+        - nome_antigo (str): Nome antigo da coluna.
+        - nome_novo (str): Nome novo da coluna.
+
+        Retorna:
+        - None
+
+        Exemplo:
+            >>> alter_collunm('my_database', 'my_collection', 'name', 'nome')
+    """
     logger_mongodb_data_manipulation.info(
         f"[alter_collunm] Alterando um coluna da base de dados {alt_database} e collection {alt_collection}.")
     collection, client = conecta_collection(alt_database, alt_collection)

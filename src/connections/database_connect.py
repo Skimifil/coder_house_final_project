@@ -8,6 +8,19 @@ logger_database_connection = configurar_logger("database_connection",
 
 
 def connect_mongo():
+    """
+        Estabelece uma conexão com o banco de dados MongoDB.
+
+        Retorna:
+        - pymongo.database.Database ou None: Retorna o objeto de banco de dados pymongo.database.Database
+          se a conexão for bem-sucedida. Retorna None se houver falha na conexão.
+
+        Exceções:
+        - Exception: Se ocorrer algum erro durante a conexão com o MongoDB, uma exceção será levantada.
+
+        Exemplo:
+        >>> db = connect_mongo()
+    """
     mongo_user = MONGODB_CONFIG['MONGODBUSER']
     mongo_pass = MONGODB_CONFIG['MONGODBPASSWORD']
     mongo_server = MONGODB_CONFIG['MONGODBSERVER']
@@ -26,11 +39,3 @@ def connect_mongo():
         logger_database_connection.error(
             f"[connect_mongo] Erro ao conectar no MongoDB, erro: {e}")
         print(f"Erro ao conectar no MongoDB, erro: {e}")
-
-
-def connect_mysql():
-    pass
-
-
-def connect_scylladb():
-    pass

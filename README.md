@@ -60,63 +60,57 @@ Collections:
 
 Será usado os dados da API do Spotify para o Pipeline no projeto final, então ja preparei algumas coisas pra isso. É preciso se cadastrar no 'Spotify for Developers' e seguir os passos de criação de 'app'.
 
-## Documentação dos códigos
+## Estrutura do projeto
 
-### main.py
+````shell
+-> .gitignore
+-> README.md
+-> requirements.txt
+-> logs\
+  |
+    -- arquivos_logs.log
+-> notebooks\
+  |
+    -- data_manipulation.ipynb
+-> src\
+  |
+    -- logger.py
+    -> main.py
+    -- mongodb_database_manipulation.py
+    -- utils.py
+    connections\
+      |
+        -- database_connect.py
+        -- api_spotify.py
+        -- config.py
+````
 
-Função main:
-    
-    É a chamada da pipeline, por ela que começa todo o fluxo, nela é chamada algumas funções do código "database_manipulation.py" (mains informações abaixo).
+Pasta principal
+````shell
+README.md (O arquivo README)
+requirements.txt (Lista de dependências do projeto)
+.gitignore (Lista de arquivos a serem ignorados pelo Git)
+````
 
-Função import_data:
-
-    Por ela é feita a chamada da API, mas deve ser alterado para um arquivo externo, ali foi para deixar mais prático os testes.
-
-
-### database_connect.py
-
-Função connect_mongo:
-
-    Função para conexão no Atlas MongoDB, ele pega as informações de conexão, monta a uri de acesso e retorna o "client" para ser usado na requisições durante o pipeline.
-
-### database_manipulation.py
-
-Função conecta_collection:
-
-    Utilizando a função de conexão no MongoDB, ele faz a conexão na 'collection' (base de dados) para iniciar a manipulação dos dados na base.
-
-Função desconect_collection:
-
-    Para fins de boas praticas, foi criado a função para fazer o 'logout' no MongoDB.
-
-Função create_mongo:
-
-    Durante a manipulação, caso a 'collection' não exista, você pode cria-la com este função. Lembrando que essa função precisa ser alterada conforme os dados que tiver sendo usado.
-
-Função insert_mongo:
-
-    Função que faz a inserção dos dados na 'collection', ele precisa ser alterado para se encaixar com o dataframe usado.
-
-Função list_mongo_db_info:
-
-    Função para mostrar as informações do MongoDB.
-
-Função list_mongo_db_collection_info:
-
-    Função para mostrar as informações da Collection.
-
-Função remove_doc_mongo:
-
-    Função que remove um documento da 'collection'.
-
-Função alter_collunm:
-
-    Função para alterar o nome de alguma coluna da 'collection'.
-
-
-### data_manipulation.ipynb
-
-Criei esse Jupyter notebook para manipular o dados da 'collection', ele é pra testar e avaliar os dados armazenados.
+Subpastas
+````shell
+logs:
+     São gerados os logs das funções de cada funcionalidade:
+        database_connection.log (Arquivo de log de conexão ao banco de dados)
+        mongodb_database_manipulation.log (Arquivo de log de manipulação do banco de dados MongoDB)
+        api_connection.log (Arquivo de log da API)
+notebooks:
+    data_manipulation.ipynb (Notebook Jupyter para modelagem de dados)
+src:
+    connections:
+        configs.py (Arquivo de configuração do projeto, contendo as informações de acesso ao MongoDB e quais são os endpoints da API)
+        database_connect.py (Arquivo para conexão ao banco de dados MongoDB)
+        api_spotify.py (Arquivo para conexão na API)
+    main.py (Arquivo principal do projeto)
+    logger.py (Arquivo de configuração do logger e geração de logs)
+    mongodb_database_manipulation.py (Arquivo para manipulação do banco de dados MongoDB)
+    utils.py (Arquivo de utilidades)
+````
 
 ## Referências
 [Coder House](https://www.coderhouse.com/br/)
